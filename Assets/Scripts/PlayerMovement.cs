@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float dirX = 0f;
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float jumpForce = 14f;
+    [SerializeField] private AudioSource audioJump;
     
     private enum MovementState { idle,running,jumping,falling};
     private MovementState state = MovementState.idle;
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(dirX*moveSpeed,rb.velocity.y);
         if (Input.GetButton("Jump")&& IsGrounded())
         {
+            audioJump.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
         UpdateAnimationState();
